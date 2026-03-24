@@ -96,7 +96,7 @@ function Order() {
 
         setTimeout(() => {
           navigate("/dashboard");
-        }, 2000);
+        }, 800);
       } else {
         setSeverity("error");
         setMessage(data.message || "Submission failed");
