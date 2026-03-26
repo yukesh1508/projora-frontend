@@ -12,7 +12,7 @@ import {
   Alert,
   CircularProgress
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
@@ -20,6 +20,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import API_BASE_URL from "../services/api";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -66,7 +68,7 @@ function Login() {
         setOpen(true);
 
         setTimeout(() => {
-          window.location.href = "/dashboard";
+          navigate("/dashboard");
         }, 1200);
       } else {
         setSeverity("error");
@@ -129,6 +131,7 @@ function Login() {
               required
               value={formData.email}
               onChange={handleChange}
+              autoComplete="email"
               sx={{ mb: 3 }}
               InputProps={{
                 startAdornment: (
@@ -147,6 +150,7 @@ function Login() {
               required
               value={formData.password}
               onChange={handleChange}
+              autoComplete="current-password"
               sx={{ mb: 2 }}
               InputProps={{
                 startAdornment: (

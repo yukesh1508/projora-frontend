@@ -13,7 +13,7 @@ import {
   Alert,
   CircularProgress
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
@@ -23,6 +23,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import API_BASE_URL from "../services/api";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -87,7 +89,7 @@ function Register() {
         });
 
         setTimeout(() => {
-          window.location.href = "/login";
+          navigate("/login");
         }, 1500);
       } else {
         setSeverity("error");
@@ -151,6 +153,7 @@ function Register() {
                   required
                   value={formData.fullName}
                   onChange={handleChange}
+                  autoComplete="name"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -170,6 +173,7 @@ function Register() {
                   required
                   value={formData.email}
                   onChange={handleChange}
+                  autoComplete="email"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -189,6 +193,7 @@ function Register() {
                   required
                   value={formData.phone}
                   onChange={handleChange}
+                  autoComplete="tel"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -208,6 +213,7 @@ function Register() {
                   required
                   value={formData.password}
                   onChange={handleChange}
+                  autoComplete="new-password"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -237,6 +243,7 @@ function Register() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
+                  autoComplete="new-password"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
