@@ -67,9 +67,7 @@ function Login() {
         setMessage("Login successful");
         setOpen(true);
 
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 1200);
+        navigate("/dashboard");
       } else {
         setSeverity("error");
         setMessage(data.message || "Invalid email or password");

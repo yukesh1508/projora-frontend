@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Container,
@@ -23,6 +24,8 @@ import {
 import API_BASE_URL from "../services/api";
 
 function UserDashboard() {
+  const navigate = useNavigate();
+
   const [orders, setOrders] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,9 +50,9 @@ function UserDashboard() {
     setOpen(true);
 
     setTimeout(() => {
-      window.location.href = "/login";
+      navigate("/login");
     }, 1200);
-  }, []);
+  }, [navigate]);
 
   const fetchOrders = useCallback(
     async (email) => {
@@ -90,14 +93,14 @@ function UserDashboard() {
     const storedUser = localStorage.getItem("userData");
 
     if (!token || !storedUser) {
-      window.location.href = "/login";
+      navigate("/login");
       return;
     }
 
     const parsedUser = JSON.parse(storedUser);
     setUser(parsedUser);
     fetchOrders(parsedUser.email);
-  }, [token, fetchOrders]);
+  }, [token, fetchOrders, navigate]);
 
   const getStatusColor = (status) => {
     if (status === "Pending") return "warning";
@@ -273,7 +276,7 @@ function UserDashboard() {
                         size="small"
                         sx={{ background: "#0B1C39" }}
                         onClick={() =>
-                          window.location.href = `/project-status?email=${order.email}`
+                          navigate(`/project-status?email=${order.email}`)
                         }
                       >
                         Track
@@ -315,7 +318,7 @@ function UserDashboard() {
             <Button
               variant="outlined"
               onClick={() =>
-                window.location.href = `/project-status?email=${user.email}`
+                navigate(`/project-status?email=${user.email}`)
               }
             >
               View All Status
@@ -327,7 +330,7 @@ function UserDashboard() {
               onClick={() => {
                 localStorage.removeItem("userToken");
                 localStorage.removeItem("userData");
-                window.location.href = "/login";
+                navigate("/login");
               }}
             >
               Logout

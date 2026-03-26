@@ -88,9 +88,7 @@ function Register() {
           confirmPassword: ""
         });
 
-        setTimeout(() => {
-          navigate("/login");
-        }, 1500);
+        navigate("/login");
       } else {
         setSeverity("error");
         setMessage(data.message || "Registration failed");
